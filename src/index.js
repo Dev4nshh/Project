@@ -6,12 +6,19 @@ import connectDB from "./db/index.js"
 
 
 dotenv.config({
-path: "./env"
+    path: "./env"
 }
 )
-
-// console.log("MONGODB_URL =>", process.env.MONGODB_URL);
 connectDB()
+    .then(() => {
+        app.listen(process.env.PORT || 8000, () => {
+            console.log(`Server is running at port : ${process.env.PORT}`)
+        })
+    })
+    .catch((err) => {
+        console.log("Mongo dv connection failed !!!", err);
+    })
+// console.log("MONGODB_URL =>", process.env.MONGODB_URL);
 // import express from "express"
 // const app = express()
 // (async () => {
